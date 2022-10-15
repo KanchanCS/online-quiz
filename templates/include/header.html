@@ -1,0 +1,27 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="nav-brand">
+        <h4 class="text-dark"> <i class="fa fa-user-circle fa-warning" aria-hidden="true"></i> Welcome {% if request.user.is_authenticated %} {{request.user.username}} {% else %} Guest {% endif %}</h4>
+      </div>
+      <ul class="navbar-nav ms-auto py-4 py-lg-0 d-flex align-items-center">
+
+        <li class="nav-item"><a class="nav-link mx-3" href="{% url 'quiz:quiz' %}">Home</a></li>
+        {% if request.user.is_staff %}
+        <li class="nav-item"><a class="nav-link mx-3" href="{% url 'quiz:addQuestion' %}">Quiz</a></li>
+        {% endif %}
+        {% if request.user.is_authenticated %}
+        <li class="nav-item"><a class="nav-link mx-3 btn btn-danger" href="{% url 'quiz:logout' %}">Log Out</a></li>
+        {% else %}
+        <li class="nav-item"><a class="nav-link mx-2 btn btn-primary " href="{% url 'quiz:login' %}">Login</a></li>
+        
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
